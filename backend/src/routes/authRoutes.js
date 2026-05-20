@@ -1,13 +1,28 @@
 const express = require('express');
-const router = express.Router();
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const db = require('../db/database');
+const {
+    register,
+    login
+} = require('../controllers/authController');
+
+const router = express.Router();
+
+/**
+ * @swagger
+ * tags:
+ *   name: Authentication
+ *   description: User authentication endpoints
+ */
 
 /**
  * @swagger
  * /api/auth/register:
  *   post:
- *     summary: Register new user
- *     tags: [Authentication]
+ *     summary: Register a new user
+ *     tags:
+ *       - Authentication
  *     requestBody:
  *       required: true
  *       content:
@@ -21,18 +36,30 @@ const db = require('../db/database');
  *             properties:
  *               username:
  *                 type: string
+ *                 example: user1
  *               email:
  *                 type: string
+ *                 example: user1@test.com
  *               password:
  *                 type: string
+ *                 example: 123456
  *     responses:
  *       201:
  *         description: User registered successfully
- *
+ *       400:
+ *         description: Missing required fields
+ *       500:
+ *         description: Database error
+ */
+router.post('/register', register);
+
+/**
+ * @swagger
  * /api/auth/login:
  *   post:
- *     summary: Login user
- *     tags: [Authentication]
+ *     summary: Login user and receive JWT token
+ *     tags:
+ *       - Authentication
  *     requestBody:
  *       required: true
  *       content:
@@ -45,77 +72,21 @@ const db = require('../db/database');
  *             properties:
  *               email:
  *                 type: string
+ *                 example: user1@test.com
  *               password:
  *                 type: string
+ *                 example: 123456
  *     responses:
  *       200:
  *         description: Login successful
+ *       400:
+ *         description: Email and password are required
+ *       401:
+ *         description: Invalid credentials
+ *       500:
+ *         description: Server error
  */
+router.post('/login', login);
 
-router.post('/register', (req, res) => {
-    const { username, email, password } = req.body;
-
-    if (!username || !email || !password) {
-        return res.status(400).json({
-            error: 'All fields are required'
-        });
-    }
-
-    const query = `
-        INSERT INTO users (username, email, password)
-        VALUES (?, ?, ?)
-    `;
-
-    db.run(query, [username, email, password], function (err) {
-        if (err) {
-            return res.status(500).json({
-                error: err.message
-            });
-        }
-
-        res.status(201).json({
-            message: 'User registered successfully',
-            id: this.lastID
-        });
-    });
-});
-
-router.post('/login', (req, res) => {
-    const { email, password } = req.body;
-
-    if (!email || !password) {
-        return res.status(400).json({
-            error: 'Email and password are required'
-        });
-    }
-
-    const query = `
-        SELECT * FROM users
-        WHERE email = ? AND password = ?
-    `;
-
-    db.get(query, [email, password], (err, user) => {
-        if (err) {
-            return res.status(500).json({
-                error: err.message
-            });
-        }
-
-        if (!user) {
-            return res.status(401).json({
-                error: 'Invalid credentials'
-            });
-        }
-
-        res.json({
-            message: 'Login successful',
-            user: {
-                id: user.id,
-                username: user.username,
-                email: user.email
-            }
-        });
-    });
-});
 
 module.exports = router;

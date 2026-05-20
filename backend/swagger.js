@@ -10,16 +10,20 @@ const options = {
         },
         servers: [
             {
-                url: 'http://localhost:3000'
+                url: 'http://localhost:5000'
             }
-        ]
+        ],
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT'
+                }
+            }
+        }
     },
-    apis: [
-        './src/routes/usageRoutes.js',
-        './src/routes/authRoutes.js'
-    ]
+    apis: ['./src/routes/*.js']
 };
 
-const swaggerSpec = swaggerJsdoc(options);
-
-module.exports = swaggerSpec;
+module.exports = swaggerJsdoc(options);

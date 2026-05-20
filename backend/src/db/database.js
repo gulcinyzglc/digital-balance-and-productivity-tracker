@@ -13,6 +13,7 @@ db.serialize(() => {
     db.run(`
         CREATE TABLE IF NOT EXISTS usage_records (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
             app_name TEXT NOT NULL,
             category TEXT NOT NULL,
             duration INTEGER NOT NULL,
@@ -28,6 +29,15 @@ db.serialize(() => {
             password TEXT NOT NULL
         )
     `);
+    
+    db.run(`
+    CREATE TABLE IF NOT EXISTS goals (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        title TEXT,
+        target_minutes INTEGER
+    )
+`);
 
 });
 

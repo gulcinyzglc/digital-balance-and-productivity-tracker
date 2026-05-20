@@ -1,199 +1,168 @@
+const express = require('express');
+const router = express.Router();
+
+const authenticateToken = require('../middleware/authMiddleware');
+
+const {
+    getUsages,
+    createUsage,
+    updateUsage,
+    deleteUsage
+} = require('../controllers/usageController');
+
+/**
+ * @swagger
+ * tags:
+ *   name: Usage Records
+ *   description: User-specific digital usage tracking endpoints
+ */
+
 /**
  * @swagger
  * /api/usage:
  *   get:
- *     summary: Get all usage records
+ *     summary: Get current user's usage records
+ *     tags:
+ *       - Usage Records
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Success
- *
+ *         description: Usage records returned successfully
+ *       401:
+ *         description: Access token required
+ *       403:
+ *         description: Invalid or expired token
+ */
+router.get('/', authenticateToken, getUsages);
+
+/**
+ * @swagger
+ * /api/usage:
  *   post:
- *     summary: Create a usage record
+ *     summary: Create a new usage record
+ *     tags:
+ *       - Usage Records
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - app_name
+ *               - category
+ *               - duration
+ *               - usage_date
  *             properties:
  *               app_name:
  *                 type: string
+ *                 example: Instagram
  *               category:
  *                 type: string
+ *                 example: Social Media
  *               duration:
  *                 type: integer
+ *                 example: 120
  *               usage_date:
  *                 type: string
+ *                 example: 2026-05-20
  *     responses:
  *       201:
- *         description: Record created
- *
+ *         description: Usage record created successfully
+ *       400:
+ *         description: Missing required fields
+ *       401:
+ *         description: Access token required
+ *       403:
+ *         description: Invalid or expired token
+ */
+router.post('/', authenticateToken, createUsage);
+
+/**
+ * @swagger
  * /api/usage/{id}:
  *   put:
  *     summary: Update a usage record
+ *     tags:
+ *       - Usage Records
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: integer
+ *         example: 1
+ *         description: Usage record ID
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - app_name
+ *               - category
+ *               - duration
+ *               - usage_date
  *             properties:
  *               app_name:
  *                 type: string
+ *                 example: YouTube
  *               category:
  *                 type: string
+ *                 example: Study
  *               duration:
  *                 type: integer
+ *                 example: 90
  *               usage_date:
  *                 type: string
+ *                 example: 2026-05-20
  *     responses:
  *       200:
- *         description: Record updated
- *
+ *         description: Usage record updated successfully
+ *       400:
+ *         description: Missing required fields
+ *       401:
+ *         description: Access token required
+ *       403:
+ *         description: Invalid or expired token
+ *       404:
+ *         description: Usage record not found
+ */
+router.put('/:id', authenticateToken, updateUsage);
+
+/**
+ * @swagger
+ * /api/usage/{id}:
  *   delete:
  *     summary: Delete a usage record
+ *     tags:
+ *       - Usage Records
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: integer
+ *         example: 1
+ *         description: Usage record ID
  *     responses:
  *       200:
- *         description: Record deleted
-  */
-
-
-const express = require('express');
-const router = express.Router();
-const db = require('../db/database');
-
-/**
- * GET all usage records
+ *         description: Usage record deleted successfully
+ *       401:
+ *         description: Access token required
+ *       403:
+ *         description: Invalid or expired token
+ *       404:
+ *         description: Usage record not found
  */
-router.get('/', (req, res) => {
-    db.all('SELECT * FROM usage_records', [], (err, rows) => {
-        if (err) {
-            return res.status(500).json({
-                error: err.message
-            });
-        }
-
-        res.json(rows);
-    });
-});
-
-/**
- * CREATE usage record
- */
-router.post('/', (req, res) => {
-    const { app_name, category, duration, usage_date } = req.body;
-
-    if (!app_name || !category || !duration || !usage_date) {
-        return res.status(400).json({
-            error: 'All fields are required'
-        });
-    }
-
-    const query = `
-        INSERT INTO usage_records
-        (app_name, category, duration, usage_date)
-        VALUES (?, ?, ?, ?)
-    `;
-
-    db.run(
-        query,
-        [app_name, category, duration, usage_date],
-        function (err) {
-            if (err) {
-                return res.status(500).json({
-                    error: err.message
-                });
-            }
-
-            res.status(201).json({
-                message: 'Usage record created',
-                id: this.lastID
-            });
-        }
-    );
-});
-
-/**
- * UPDATE usage record
- */
-router.put('/:id', (req, res) => {
-    const { id } = req.params;
-    const { app_name, category, duration, usage_date } = req.body;
-
-    if (!app_name || !category || !duration || !usage_date) {
-        return res.status(400).json({
-            error: 'All fields are required'
-        });
-    }
-
-    const query = `
-        UPDATE usage_records
-        SET app_name = ?, category = ?, duration = ?, usage_date = ?
-        WHERE id = ?
-    `;
-
-    db.run(
-        query,
-        [app_name, category, duration, usage_date, id],
-        function (err) {
-            if (err) {
-                return res.status(500).json({
-                    error: err.message
-                });
-            }
-
-            if (this.changes === 0) {
-                return res.status(404).json({
-                    error: 'Usage record not found'
-                });
-            }
-
-            res.json({
-                message: 'Usage record updated'
-            });
-        }
-    );
-});
-
-/**
- * DELETE usage record
- */
-router.delete('/:id', (req, res) => {
-    const { id } = req.params;
-
-    db.run(
-        'DELETE FROM usage_records WHERE id = ?',
-        [id],
-        function (err) {
-            if (err) {
-                return res.status(500).json({
-                    error: err.message
-                });
-            }
-
-            if (this.changes === 0) {
-                return res.status(404).json({
-                    error: 'Usage record not found'
-                });
-            }
-
-            res.json({
-                message: 'Usage record deleted'
-            });
-        }
-    );
-});
+router.delete('/:id', authenticateToken, deleteUsage);
 
 module.exports = router;
