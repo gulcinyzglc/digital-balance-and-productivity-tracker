@@ -345,4 +345,8 @@ The project includes unit testing for business logic functions.
 
 # 👩‍💻 Author
 
+<<<<<<< HEAD
 Developed as a full-stack web application project for academic coursework system analysis & design.
+=======
+Developed as a full-stack web application project for academic coursework system analysis & design.
+>>>>>>> ab0d2bfdc8a4fcdd78e24b03ccb3b52ff39f3e34
