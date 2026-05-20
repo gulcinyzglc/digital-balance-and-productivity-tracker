@@ -1,206 +1,392 @@
-# FocusFlow - Digital Balance and Productivity Tracker
+# FocusFlow — Digital Balance & Productivity Tracker
 
-FocusFlow is a full-stack web application developed to help users monitor and manage their digital productivity activities.
+FocusFlow is a modern full-stack productivity tracking web application developed using **Node.js**, **Express.js**, **SQLite**, and **Vanilla JavaScript**.
 
-The project follows:
-- MVC Architecture
-- Multi-Tier Architecture
-- REST API Design Principles
+The application helps users monitor their digital habits, analyze productive and unproductive screen time, manage daily productivity goals, and improve their digital balance through interactive analytics and personalized tracking.
 
 ---
 
-# Technologies
+# Project Purpose
+
+The goal of this project is to provide users with a clean and user-friendly platform where they can:
+
+- Track daily application usage
+- Analyze productivity habits
+- Manage digital balance goals
+- Monitor screen time
+- Visualize usage statistics
+- Improve time management
+
+The project follows a modular RESTful architecture and includes authentication, API documentation, analytics calculations, and unit testing.
+
+---
+
+# Main Features
+
+## Authentication System
+- User registration
+- User login
+- JWT-based authentication
+- Protected API routes
+- Secure password hashing using bcryptjs
+
+---
+
+## Usage Record Management
+Users can manage their daily digital usage records.
+
+### Features
+- Add usage records
+- Update usage records
+- Delete usage records
+- View personal usage history
+
+### Tracked Data
+- Application name
+- Category
+- Duration
+- Usage date
+
+---
+
+## Productivity Analytics
+
+The system automatically calculates productivity statistics and analytics.
+
+### Analytics Features
+- Total screen time
+- Productive time
+- Unproductive time
+- Productivity score
+- Most used application
+- Top used applications
+
+---
+
+## Goal Management
+
+Users can create daily productivity goals for applications.
+
+### Goal Features
+- Create goals
+- Set target minutes
+- Track progress
+- Visual progress bars
+- Goal exceeded detection
+- Delete goals
+
+### Example Goals
+
+```txt
+Instagram → 60 min
+YouTube → 90 min
+Netflix → 40 min
+```
+
+---
+
+# Productivity Score Formula
+
+```txt
+(Productive Time / Total Screen Time) × 100
+```
+
+### Example
+
+```txt
+75 / 195 × 100 = 38%
+```
+
+---
+
+# Goal Progress Formula
+
+```txt
+(Current Usage / Target Minutes) × 100
+```
+
+---
+
+# Technologies Used
 
 ## Backend
 - Node.js
 - Express.js
-- SQLite
+- SQLite3
 - JWT Authentication
-- Swagger API Documentation
-- Jest Unit Testing
+- bcryptjs
+- Swagger UI Express
+- swagger-jsdoc
+
+---
 
 ## Frontend
 - HTML5
 - CSS3
 - Vanilla JavaScript
-- Fetch API
-- LocalStorage
+- Font Awesome
+
+---
+
+## Testing
+- Jest
+
+---
+
+# Software Architecture
+
+The project follows a modular layered architecture.
+
+## Controllers
+Handle request and response operations.
+
+## Routes
+Define REST API endpoints.
+
+## Services
+Contain business logic and analytics calculations.
+
+## Middleware
+Manage JWT authentication and authorization.
+
+## Database Layer
+SQLite database integration and table management.
 
 ---
 
 # Project Structure
 
-```text
-focusflow/
+```txt
+FOCUSFLOW/
 │
 ├── backend/
-│   ├── config/
-│   │   └── db.js
+│   │
+│   ├── node_modules/
 │   │
 │   ├── src/
+│   │   │
 │   │   ├── controllers/
 │   │   │   ├── authController.js
-│   │   │   └── activityController.js
+│   │   │   ├── goalController.js
+│   │   │   ├── statsController.js
+│   │   │   └── usageController.js
 │   │   │
-│   │   ├── services/
-│   │   │   ├── authService.js
-│   │   │   └── activityService.js
+│   │   ├── db/
+│   │   │   └── database.js
 │   │   │
-│   │   ├── middlewares/
-│   │   │   ├── authMiddleware.js
-│   │   │   └── validateMiddleware.js
+│   │   ├── middleware/
+│   │   │   └── authMiddleware.js
 │   │   │
-│   │   ├── models/
-│   │   │   ├── User.js
-│   │   │   └── Activity.js
+│   │   ├── routes/
+│   │   │   ├── authRoutes.js
+│   │   │   ├── goalRoutes.js
+│   │   │   ├── statsRoutes.js
+│   │   │   └── usageRoutes.js
 │   │   │
-│   │   └── routes/
-│   │       ├── authRoutes.js
-│   │       └── activityRoutes.js
+│   │   └── services/
+│   │       ├── analyticsService.js
+│   │       ├── goalService.js
+│   │       └── statsService.js
 │   │
 │   ├── tests/
-│   │   └── activityService.test.js
+│   │   ├── analyticsService.test.js
+│   │   ├── goalService.test.js
+│   │   └── statsService.test.js
 │   │
-│   ├── swagger.json
 │   ├── .env
+│   ├── app.js
+│   ├── focusflow.db
+│   ├── package-lock.json
+│   ├── package.json
 │   ├── server.js
-│   └── package.json
+│   └── swagger.js
 │
 ├── frontend/
-│   ├── public/
-│   │   ├── css/
-│   │   │   └── styles.css
-│   │   └── index.html
-│   │
-│   ├── src/
-│   │   ├── api/
-│   │   │   └── apiClient.js
-│   │   │
-│   │   ├── utils/
-│   │   │   └── auth.js
-│   │   │
-│   │   └── app.js
-│   │
-│   └── package.json
+│   ├── app.js
+│   ├── index.html
+│   └── style.css
 │
-├── README.md
-└── .gitignore
+├── .gitignore
+└── README.md
 ```
 
 ---
 
-# Features
+# REST API Endpoints
 
-- User Registration
-- User Login
-- JWT Authentication
-- Productivity Activity Tracking
-- Activity Listing
-- Activity Deletion
-- REST API Architecture
-- Swagger API Documentation
-- Unit Testing
+## Authentication
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/auth/register` | Register new user |
+| POST | `/api/auth/login` | Login and receive JWT token |
 
 ---
 
-# Backend Setup
+## Usage Records
 
-Navigate to backend folder:
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/usage` | Get all usage records |
+| POST | `/api/usage` | Create usage record |
+| PUT | `/api/usage/:id` | Update usage record |
+| DELETE | `/api/usage/:id` | Delete usage record |
+
+---
+
+## Goals
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/goals` | Get all goals |
+| POST | `/api/goals` | Create goal |
+| DELETE | `/api/goals/:id` | Delete goal |
+
+---
+
+## Statistics
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/stats` | Get productivity statistics |
+
+---
+
+# Swagger Documentation
+
+Swagger/OpenAPI documentation is available at:
+
+```txt
+http://localhost:5000/api-docs
+```
+
+Swagger features:
+- API testing
+- JWT authorization
+- Endpoint documentation
+- Request/response schemas
+
+---
+
+# Installation & Setup
+
+## 1. Clone the Repository
+
+```bash
+git clone <repository-url>
+```
+
+---
+
+## 2. Install Dependencies
 
 ```bash
 cd backend
-```
-
-Install dependencies:
-
-```bash
 npm install
 ```
 
-Start development server:
+---
 
-```bash
-npm run dev
+## 3. Configure Environment Variables
+
+Create a `.env` file inside the backend directory:
+
+```env
+JWT_SECRET=your_secret_key
+PORT=5000
 ```
 
-or:
+---
+
+## 4. Start Backend Server
 
 ```bash
 npm start
 ```
 
-Backend runs on:
+Server runs on:
 
-```text
-http://localhost:3000
-```
-
-Swagger API Documentation:
-
-```text
-http://localhost:3000/api-docs
+```txt
+http://localhost:5000
 ```
 
 ---
 
-# Frontend Setup
+## 5. Open Frontend
 
-Navigate to frontend folder:
+Open:
 
-```bash
-cd frontend
+```txt
+frontend/index.html
 ```
 
-Run frontend using Live Server extension
-or:
-
-```bash
-npx serve public -p 8080
-```
-
-Frontend runs on:
-
-```text
-http://localhost:8080
-```
+in your browser.
 
 ---
 
-# API Endpoints
+# Running Tests
 
-## Authentication
-
-```http
-POST /api/auth/register
-POST /api/auth/login
-```
-
-## Activities
-
-```http
-GET /api/activities
-POST /api/activities
-DELETE /api/activities/:id
-```
-
----
-
-# Unit Tests
-
-Run unit tests:
+Run unit tests using:
 
 ```bash
-cd backend
 npm test
 ```
 
+Example output:
+
+```txt
+PASS tests/statsService.test.js
+PASS tests/goalService.test.js
+PASS tests/analyticsService.test.js
+```
+
 ---
 
-# Architecture Notes
+# Unit Testing
 
-- Controllers handle HTTP requests and responses.
-- Services contain core business logic.
-- Routes only manage endpoint routing.
-- Middlewares handle authentication and validation.
-- SQLite is used as the lightweight relational database.
-- JWT is used for secure authentication.
+The project includes unit testing for business logic functions.
+
+### Tested Modules
+- analyticsService.js
+- goalService.js
+- statsService.js
+
+### Tested Features
+- Productivity score calculations
+- Goal progress calculations
+- Goal exceeded detection
+- Most used application detection
+- Total screen time calculations
+
+---
+
+# Screenshots
+
+The project includes:
+- Login page
+- Dashboard overview
+- Usage records table
+- Productivity analytics
+- Daily goals section
+- Swagger API documentation
+
+---
+
+# Future Improvements
+
+Possible future improvements for the project:
+
+- Weekly analytics charts
+- Monthly productivity reports
+- Dark mode support
+- Mobile responsive optimization
+- Notification system
+- Data visualization with charts
+- Export reports as PDF
+- User profile settings
+
+---
+
+# Author
+
+Developed as a full-stack web application project for academic coursework in web development and system analysis & design.
