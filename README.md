@@ -1,7 +1,7 @@
 # 🌿 FocusFlow — Digital Balance & Productivity Tracker
 
 
-# 📌 Project Overview
+#  Project Overview
 
 FocusFlow is a modern full-stack productivity tracking web application developed using **Node.js**, **Express.js**, **SQLite**, and **Vanilla JavaScript**.
 
@@ -342,20 +342,6 @@ The project includes unit testing for business logic functions.
 
 ---
 
-# 🚀 Future Improvements
-
-Possible future improvements for the project:
-
-- Weekly analytics charts
-- Monthly productivity reports
-- Dark mode support
-- Mobile responsive optimization
-- Notification system
-- Data visualization with charts
-- Export reports as PDF
-- User profile settings
-
----
 
 # 👩‍💻 Author
 
