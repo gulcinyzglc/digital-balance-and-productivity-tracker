@@ -1,12 +1,5 @@
 # 🌿 FocusFlow — Digital Balance & Productivity Tracker
 
-![Node.js](https://img.shields.io/badge/Node.js-Backend-339933?style=for-the-badge&logo=node.js&logoColor=white)
-![Express.js](https://img.shields.io/badge/Express.js-API-000000?style=for-the-badge&logo=express&logoColor=white)
-![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-Frontend-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Jest](https://img.shields.io/badge/Jest-Testing-C21325?style=for-the-badge&logo=jest&logoColor=white)
-
----
 
 # 📌 Project Overview
 
@@ -94,29 +87,7 @@ YouTube → 90 min
 Netflix → 40 min
 ```
 
----
 
-# 🧮 Productivity Score Formula
-
-```txt
-(Productive Time / Total Screen Time) × 100
-```
-
-### Example
-
-```txt
-75 / 195 × 100 = 38%
-```
-
----
-
-# 📈 Goal Progress Formula
-
-```txt
-(Current Usage / Target Minutes) × 100
-```
-
----
 
 # 🛠 Technologies Used
 
