@@ -1,4 +1,4 @@
-# 🌿 FocusFlow — Digital Balance & Productivity Tracker
+# <img src="image.png" width="32"> FocusFlow — Digital Balance & Productivity Tracker
 
 
 #  Project Overview
@@ -24,7 +24,7 @@ The project follows a modular RESTful architecture and includes authentication, 
 
 ---
 
-# ✨ Main Features
+# Main Features
 
 ## 🔐 Authentication System
 - User registration
@@ -115,7 +115,7 @@ Netflix → 40 min
 
 ---
 
-# 🏗 Software Architecture
+#  Software Architecture
 
 The project follows a modular layered architecture.
 
