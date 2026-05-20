@@ -1,4 +1,4 @@
-# <img src="image.png" width="32"> FocusFlow — Digital Balance & Productivity Tracker
+# 🔗 FocusFlow — Digital Balance & Productivity Tracker
 
 
 #  Project Overview
