@@ -1,4 +1,14 @@
-# FocusFlow — Digital Balance & Productivity Tracker
+# 🌿 FocusFlow — Digital Balance & Productivity Tracker
+
+![Node.js](https://img.shields.io/badge/Node.js-Backend-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-API-000000?style=for-the-badge&logo=express&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-Frontend-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Jest](https://img.shields.io/badge/Jest-Testing-C21325?style=for-the-badge&logo=jest&logoColor=white)
+
+---
+
+# 📌 Project Overview
 
 FocusFlow is a modern full-stack productivity tracking web application developed using **Node.js**, **Express.js**, **SQLite**, and **Vanilla JavaScript**.
 
@@ -6,7 +16,7 @@ The application helps users monitor their digital habits, analyze productive and
 
 ---
 
-# Project Purpose
+# 🎯 Project Purpose
 
 The goal of this project is to provide users with a clean and user-friendly platform where they can:
 
@@ -21,9 +31,9 @@ The project follows a modular RESTful architecture and includes authentication, 
 
 ---
 
-# Main Features
+# ✨ Main Features
 
-## Authentication System
+## 🔐 Authentication System
 - User registration
 - User login
 - JWT-based authentication
@@ -32,7 +42,8 @@ The project follows a modular RESTful architecture and includes authentication, 
 
 ---
 
-## Usage Record Management
+## 📱 Usage Record Management
+
 Users can manage their daily digital usage records.
 
 ### Features
@@ -49,7 +60,7 @@ Users can manage their daily digital usage records.
 
 ---
 
-## Productivity Analytics
+## 📊 Productivity Analytics
 
 The system automatically calculates productivity statistics and analytics.
 
@@ -63,7 +74,7 @@ The system automatically calculates productivity statistics and analytics.
 
 ---
 
-## Goal Management
+## 🎯 Goal Management
 
 Users can create daily productivity goals for applications.
 
@@ -85,7 +96,7 @@ Netflix → 40 min
 
 ---
 
-# Productivity Score Formula
+# 🧮 Productivity Score Formula
 
 ```txt
 (Productive Time / Total Screen Time) × 100
@@ -99,7 +110,7 @@ Netflix → 40 min
 
 ---
 
-# Goal Progress Formula
+# 📈 Goal Progress Formula
 
 ```txt
 (Current Usage / Target Minutes) × 100
@@ -107,7 +118,7 @@ Netflix → 40 min
 
 ---
 
-# Technologies Used
+# 🛠 Technologies Used
 
 ## Backend
 - Node.js
@@ -133,7 +144,7 @@ Netflix → 40 min
 
 ---
 
-# Software Architecture
+# 🏗 Software Architecture
 
 The project follows a modular layered architecture.
 
@@ -154,7 +165,7 @@ SQLite database integration and table management.
 
 ---
 
-# Project Structure
+# 📁 Project Structure
 
 ```txt
 FOCUSFLOW/
@@ -212,7 +223,7 @@ FOCUSFLOW/
 
 ---
 
-# REST API Endpoints
+# 🌐 REST API Endpoints
 
 ## Authentication
 
@@ -252,7 +263,7 @@ FOCUSFLOW/
 
 ---
 
-# Swagger Documentation
+# 📘 Swagger Documentation
 
 Swagger/OpenAPI documentation is available at:
 
@@ -268,7 +279,7 @@ Swagger features:
 
 ---
 
-# Installation & Setup
+# ⚙️ Installation & Setup
 
 ## 1. Clone the Repository
 
@@ -324,7 +335,7 @@ in your browser.
 
 ---
 
-# Running Tests
+# ✅ Running Tests
 
 Run unit tests using:
 
@@ -342,7 +353,7 @@ PASS tests/analyticsService.test.js
 
 ---
 
-# Unit Testing
+# 🧪 Unit Testing
 
 The project includes unit testing for business logic functions.
 
@@ -360,19 +371,7 @@ The project includes unit testing for business logic functions.
 
 ---
 
-# Screenshots
-
-The project includes:
-- Login page
-- Dashboard overview
-- Usage records table
-- Productivity analytics
-- Daily goals section
-- Swagger API documentation
-
----
-
-# Future Improvements
+# 🚀 Future Improvements
 
 Possible future improvements for the project:
 
@@ -387,6 +386,6 @@ Possible future improvements for the project:
 
 ---
 
-# Author
+# 👩‍💻 Author
 
-Developed as a full-stack web application project for academic coursework in web development and system analysis & design.
+Developed as a full-stack web application project for academic coursework system analysis & design.
